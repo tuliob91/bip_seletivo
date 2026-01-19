@@ -1,11 +1,9 @@
 package com.example.backend.beneficio;
 
-import com.example.ejb.BeneficioRemote;
 import com.example.model.Beneficio;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.math.BigDecimal;
-import java.util.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/beneficios")
@@ -17,15 +15,49 @@ public class BeneficioController {
         this.beneficioService = beneficioService;
     }
 
-
     @GetMapping("/getBeneficio/{id}")
     public Beneficio getSaldo(@PathVariable("id") Long id){
-        Beneficio benef = beneficioService.getBeneficio(id);
-        if (benef != null) {
-            System.out.println(">>> SUCESSO: Objeto chegou no Spring. Saldo: " + benef.getSaldo());
-        } else {
-            System.out.println(">>> ERRO: Objeto chegou NULO no Spring.");
+        return beneficioService.getBeneficio(id);
+    }
+
+    @GetMapping("/listaBeneficios")
+    public List<Beneficio> getListaBeneficios(){
+        return beneficioService.getListaBeneficiosBD();
+    }
+
+    @PostMapping("/salvar")
+    public ResponseEntity<?> salvarAtualizar(Beneficio benef){
+        try{
+            Beneficio benefSalvo = beneficioService.salvarBeneficio(benef);
+            return ResponseEntity.ok(benefSalvo);
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return benef;
+
+    }
+
+    @DeleteMapping("/excluir/{id}")
+    public ResponseEntity<?> excluirBeneficio(@PathVariable("id") Long id){
+        try{
+            beneficioService.excluirBeneficio(id);
+            return ResponseEntity.ok().build();
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+    }
+
+    @PostMapping("/transfer")
+    public ResponseEntity<?> transferirValor(@RequestBody TransferenciaDTO dadosTransfer){
+        try{
+            beneficioService.transferir(
+                        dadosTransfer.getIdOrigem()
+                    ,   dadosTransfer.getIdDestino()
+                    ,   dadosTransfer.getValor()
+            );
+            return ResponseEntity.ok().build();
+        }catch(Exception e){
+           return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

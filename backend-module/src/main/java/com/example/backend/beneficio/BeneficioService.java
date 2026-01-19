@@ -2,11 +2,10 @@ package com.example.backend.beneficio;
 
 import com.example.ejb.BeneficioRemote;
 import com.example.model.Beneficio;
-import com.example.ejb.BeneficioEjbService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -20,12 +19,23 @@ public class BeneficioService{
     }
 
     public Beneficio getBeneficio(Long id){
-        Beneficio b = beneficioRemote.getBeneficioById(id);
-        System.out.println("O objeto chegou no Spring? " + (b != null));
-        if (b != null) {
-            System.out.println("Dados do benefício: " + b.toString()); // Use um campo que exista
-        }
-        return b;
+        return beneficioRemote.getBeneficioById(id);
+    }
+
+    public List<Beneficio> getListaBeneficiosBD(){
+        return beneficioRemote.lista();
+    }
+
+    public Beneficio salvarBeneficio(Beneficio benef){
+        return beneficioRemote.salvar(benef);
+    }
+
+    public void excluirBeneficio(Long id){
+        beneficioRemote.excluir(id);
+    }
+
+    public void transferir(Long idOrigin, Long idDestino, BigDecimal valor){
+        beneficioRemote.transfer(idOrigin, idDestino, valor);
     }
 
 }

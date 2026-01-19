@@ -25,6 +25,10 @@ public class Beneficio implements java.io.Serializable {
     @Column(name="ATIVO",nullable = false)
     private Boolean ativo;
 
+    @Version
+    @Column(name="VERSION",nullable = false)
+    private Long version;
+
     public Beneficio() {
     }
 
@@ -68,6 +72,14 @@ public class Beneficio implements java.io.Serializable {
         this.ativo = ativo;
     }
 
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
     @Override
     public String toString() {
         return "Beneficio{" +
@@ -76,6 +88,7 @@ public class Beneficio implements java.io.Serializable {
                 ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", ativo=" + ativo +
+                ", version=" + version +
                 '}';
     }
 }
