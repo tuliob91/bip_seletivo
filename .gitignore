@@ -1,0 +1,34 @@
+# Java e Compilação
+*.class
+*.jar
+*.war
+*.ear
+target/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+gen/
+
+# Eclipse
+.metadata/
+.bin/
+.tmp/
+.classpath
+.project
+.settings/
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Logs e Temporários
+*.log
+temp/
+tmp/
+
+# Banco de Dados Local (se você mudou para modo arquivo)
+*.mv.db
+*.trace.db

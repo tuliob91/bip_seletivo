@@ -1,18 +1,23 @@
 server:
   port: 8081
+
 spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   datasource:
-    url: jdbc:h2:mem:desafio;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:desafio_spring;DB_CLOSE_DELAY=-1
     driver-class-name: org.h2.Driver
     username: sa
-    password: ""
+    password: "sa"
 
   h2:
     console:
       enabled: true
-      path: /h2-console
+      path: /console-teste
+      settings:
+        web-allow-others: true
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: true

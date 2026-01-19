@@ -20,7 +20,12 @@ public class BeneficioService{
     }
 
     public Beneficio getBeneficio(Long id){
-        return beneficioRemote.getBeneficioById(id);
+        Beneficio b = beneficioRemote.getBeneficioById(id);
+        System.out.println("O objeto chegou no Spring? " + (b != null));
+        if (b != null) {
+            System.out.println("Dados do benefício: " + b.toString()); // Use um campo que exista
+        }
+        return b;
     }
 
 }

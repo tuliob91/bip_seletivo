@@ -20,6 +20,12 @@ public class BeneficioController {
 
     @GetMapping("/getBeneficio/{id}")
     public Beneficio getSaldo(@PathVariable("id") Long id){
-        return beneficioService.getBeneficio(id);
+        Beneficio benef = beneficioService.getBeneficio(id);
+        if (benef != null) {
+            System.out.println(">>> SUCESSO: Objeto chegou no Spring. Saldo: " + benef.getSaldo());
+        } else {
+            System.out.println(">>> ERRO: Objeto chegou NULO no Spring.");
+        }
+        return benef;
     }
 }
