@@ -26,7 +26,7 @@ public class Beneficio implements java.io.Serializable {
     private Boolean ativo;
 
     @Version
-    @Column(name="VERSION",nullable = false)
+    @Column(name="VERSION")
     private Long version;
 
     public Beneficio() {

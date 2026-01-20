@@ -16,6 +16,10 @@ public class BeneficioEjbService implements BeneficioRemote {
     @PersistenceContext(unitName = "meuPU")
     private EntityManager em;
 
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
+
     @Override
     public Beneficio getBeneficioById(Long id){
 
