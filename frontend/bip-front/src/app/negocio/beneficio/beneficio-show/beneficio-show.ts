@@ -31,7 +31,7 @@ export class BeneficioShow implements OnInit, OnChanges {
       this.carregarDados();
     } else {
       // 2. Se for NOVO, resetamos o objeto e avisamos que o carregamento acabou
-      this.beneficio = { nome: '', descricao: '', saldo: 0, ativo: true };
+      this.beneficio = { nome: '', descricao: '',  ativo: true };
       this.carregando = false; // Isso faz o spinner sumir!
       this.cdr.detectChanges();
     }
@@ -59,9 +59,14 @@ export class BeneficioShow implements OnInit, OnChanges {
     });
   }
   salvar() {
-    this.service.salvar(this.beneficio).subscribe(() => {
-      this.activeModal.close('sucesso');
+    this.service.salvar(this.beneficio).subscribe({
+      next: (res) => {
+        this.activeModal.close()
+      }, error: (res) => {
+        this.activeModal.close(res.error)
+      },
     });
+
   }
 
   private definirContexto() {

@@ -23,9 +23,9 @@ public class BackendApplication {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:4200"); // Seu Front
-        config.addAllowedHeader("*"); // Libera todos os headers (importante!)
-        config.addAllowedMethod("*"); // Libera GET, POST, PUT, DELETE, OPTIONS
+        config.addAllowedOrigin("http://localhost:4200");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
 
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);

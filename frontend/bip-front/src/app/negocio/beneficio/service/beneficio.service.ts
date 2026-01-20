@@ -33,7 +33,7 @@ export class BeneficioService {
 
     transferir(idOrigem: number, idDestino: number, valor: number): Observable<any> {
         const payload = { idOrigem, idDestino, valor };
-        return this.http.post(`${this.API_URL}/transferir`, payload)
+        return this.http.post(`${this.API_URL}/transfer`, payload)
             .pipe(catchError(this.handleError));
     }
     private handleError(error: HttpErrorResponse) {

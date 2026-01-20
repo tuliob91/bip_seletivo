@@ -65,6 +65,9 @@ public class BeneficioEjbService implements BeneficioRemote {
         if (benefOrigin.getSaldo().compareTo(amount) < 0) {
             throw new EJBException("Saldo insuficiente para transferência!");
         }
+        if(!benefOrigin.getAtivo() || !benefDest.getAtivo()){
+            throw new EJBException("Impossível transferir entre Beneficios Inativos.");
+        }
 
         benefOrigin.setSaldo(benefOrigin.getSaldo().subtract(amount));
         benefDest.setSaldo(benefDest.getSaldo().add(amount));

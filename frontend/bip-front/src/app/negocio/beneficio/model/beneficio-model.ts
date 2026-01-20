@@ -3,7 +3,7 @@ export interface BeneficioModel{
     nome:string;
     descricao:string;
     ativo:boolean;
-    saldo:number;
+    saldo?:number;
     version?:number;
 
 }

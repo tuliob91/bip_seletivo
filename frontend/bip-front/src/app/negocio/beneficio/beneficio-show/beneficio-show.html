@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-6 mb-3">
                 <label class="form-label fw-bold">Valor</label>
-                <input *ngIf="editando" type="number" class="form-control" [(ngModel)]="beneficio.saldo" name="saldo">
+                <input *ngIf="editando" type="text" class="form-control"  placeholder="0,00" [(ngModel)]="beneficio.saldo" name="saldo" [value]="beneficio.saldo | number:'1.2-2':'pt-BR'">
                 <p *ngIf="!editando" class="form-control-plaintext border-bottom">{{ beneficio.saldo | currency:'BRL' }}
                 </p>
             </div>

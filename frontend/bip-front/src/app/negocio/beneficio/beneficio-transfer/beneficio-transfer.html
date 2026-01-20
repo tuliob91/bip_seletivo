@@ -1,1 +1,43 @@
-<p>beneficio-transfer works!</p>
+<div class="modal-header">
+  <h4 class="modal-title">Transferência entre Benefícios</h4>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-6">
+      <label>Benefício de Origem </label>
+      <select class="form-control" [(ngModel)]="origemSelecionada" (change)="onOrigemChange()">
+        <option [ngValue]="undefined">Selecione...</option>
+        <option *ngFor="let b of beneficiolist" [ngValue]="b">{{ b.nome }}</option>
+      </select>
+      <small *ngIf="origemSelecionada" class="text-primary">
+        Saldo atual: {{ origemSelecionada.saldo | currency:'BRL' }}
+      </small>
+    </div>
+
+    <div class="col-md-6">
+      <label>Benefício de Destino</label>
+      <select class="form-control" [(ngModel)]="destinoSelecionado" [disabled]="!origemSelecionada">
+        <option [ngValue]="undefined">Selecione...</option>
+        <option *ngFor="let b of listaDestino" [ngValue]="b">{{ b.nome }}</option>
+      </select>
+      <small *ngIf="destinoSelecionado" class="text-success">
+        Saldo atual:   {{ destinoSelecionado.saldo | currency:'BRL' }}
+      </small>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <label>Valor a Transferir</label>
+    <input type="text" class="form-control" [(ngModel)]="valorTransferencia" placeholder="0,00" [value]="valorTransferencia | number:'1.2-2':'pt-BR'">
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="fechar()">Cancelar</button>
+  <button type="button" class="btn btn-primary" 
+          [disabled]="!origemSelecionada || !destinoSelecionado || valorTransferencia <= 0"
+          (click)="confirmarTransferencia()">
+    Executar Transferência
+  </button>
+</div>
