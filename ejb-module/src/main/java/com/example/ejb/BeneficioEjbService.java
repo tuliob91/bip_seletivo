@@ -39,7 +39,7 @@ public class BeneficioEjbService implements BeneficioRemote {
 
     @Override
     public List<Beneficio> lista() {
-        return em.createQuery("SELECT * FROM Beneficio b",Beneficio.class).getResultList();
+        return em.createQuery("SELECT b FROM Beneficio b",Beneficio.class).getResultList();
     }
 
     @Override

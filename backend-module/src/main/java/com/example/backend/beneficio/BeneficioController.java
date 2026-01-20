@@ -7,6 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/beneficios")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
 public class BeneficioController {
 
     private final BeneficioService beneficioService;
@@ -26,7 +27,7 @@ public class BeneficioController {
     }
 
     @PostMapping("/salvar")
-    public ResponseEntity<?> salvarAtualizar(Beneficio benef){
+    public ResponseEntity<?> salvarAtualizar(@RequestBody Beneficio benef){
         try{
             Beneficio benefSalvo = beneficioService.salvarBeneficio(benef);
             return ResponseEntity.ok(benefSalvo);

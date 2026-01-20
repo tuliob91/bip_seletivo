@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ titulo }}</h4>
+    <button type="button" class="btn-close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body">
+    <div *ngIf="carregando" class="text-center p-5">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p>A carregar dados do servidor...</p>
+    </div>
+    <div *ngIf="!carregando">
+            <form  #beneficioForm="ngForm">
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Nome</label>
+            <input *ngIf="editando" type="text" class="form-control" [(ngModel)]="beneficio.nome" name="nome" required>
+            <p *ngIf="!editando" class="form-control-plaintext border-bottom">{{ beneficio.nome }}</p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Descrição</label>
+            <textarea *ngIf="editando" class="form-control" [(ngModel)]="beneficio.descricao"
+                name="descricao"></textarea>
+            <p *ngIf="!editando" class="form-control-plaintext border-bottom">{{ beneficio.descricao || 'Sem descrição'
+                }}</p>
+        </div>
+
+        <div class="row">
+            <div class="col-6 mb-3">
+                <label class="form-label fw-bold">Valor</label>
+                <input *ngIf="editando" type="number" class="form-control" [(ngModel)]="beneficio.saldo" name="saldo">
+                <p *ngIf="!editando" class="form-control-plaintext border-bottom">{{ beneficio.saldo | currency:'BRL' }}
+                </p>
+            </div>
+
+            <div class="col-6 mb-3">
+                <label class="form-label fw-bold">Status</label>
+                <div *ngIf="editando" class="form-check form-switch mt-2">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="beneficio.ativo" name="ativo">
+                    <label class="form-check-label">{{ beneficio.ativo ? 'Ativo' : 'Inativo' }}</label>
+                </div>
+                <p *ngIf="!editando" class="form-control-plaintext">
+                    <i class="bi bi-circle-fill" [class.text-success]="beneficio.ativo"
+                        [class.text-danger]="!beneficio.ativo"></i>
+                    {{ beneficio.ativo ? ' Ativo' : ' Inativo' }}
+                </p>
+            </div>
+        </div>
+    </form>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">
+        {{ editando ? 'Cancelar' : 'Fechar' }}
+    </button>
+
+    <button *ngIf="editando" type="button" class="btn btn-primary" (click)="salvar()">Salvar Alterações</button>
+</div>

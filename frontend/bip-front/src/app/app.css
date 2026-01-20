@@ -1,0 +1,7 @@
+.nav-link, .navbar-brand {
+    cursor: pointer;
+}
+.nav-link.active {
+    color: #ffc107 !important; /* Cor dourada/amarela para destacar */
+    font-weight: bold;
+}
