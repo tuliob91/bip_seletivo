@@ -94,10 +94,10 @@ public class BeneficioEjbServiceTest {
                 .thenReturn(bDestino);
 
         Exception erroCap = assertThrows(Exception.class,()->{
-            benService.transfer(1L,2L,new BigDecimal(10));
+            benService.transfer(1L,2L,new BigDecimal("10.00"));
         });
-        String msgEsperada = "Saldo insuficiente para transferência!";
-        assertEquals(msgEsperada, erroCap.getMessage());
+        String msgInativo = "Impossível transferir entre Beneficios Inativos.";
+        assertEquals(msgInativo, erroCap.getMessage());
 
         verify(em, never()).merge(any());
 
@@ -112,7 +112,7 @@ public class BeneficioEjbServiceTest {
 
         Beneficio bDestino = new Beneficio();
         bDestino.setSaldo(new BigDecimal("500.00"));
-        bDestino.setAtivo(false);
+        bDestino.setAtivo(true);
         bDestino.setId(2L);
 
         when(em.find(eq(Beneficio.class), anyLong(), eq(LockModeType.PESSIMISTIC_WRITE)))
